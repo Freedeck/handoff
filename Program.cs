@@ -49,7 +49,7 @@ namespace Handoff
                 switch (action)
                 {
                     case "download":
-                        Console.WriteLine("Got a download action");
+                        Console.WriteLine("Finding download sources..");
                         Downloader.Download(args[0].Split('/'), Wc_finished);
                         break;
                     default:
@@ -57,6 +57,8 @@ namespace Handoff
                         break;
                 }
             }
+            Console.WriteLine("Press any key to close Handoff");
+            Console.ReadLine();
         }
 
         static string Get(string uri)
