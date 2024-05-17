@@ -1,0 +1,12 @@
+﻿REGEDIT4
+
+[HKEY_CLASSES_ROOT\freedeck]
+@="Freedeck Handoff"
+"URL Protocol"=""
+
+[HKEY_CLASSES_ROOT\freedeck\shell]
+
+[HKEY_CLASSES_ROOT\freedeck\shell\open]
+
+[HKEY_CLASSES_ROOT\freedeck\shell\open\command]
+@="C:\\Users\\Aiden\\Downloads\\desktopUrlProtocolHandler-master\\desktopUrlProtocolHandler-master\\Debug\\cwcsf.exe %1" 
