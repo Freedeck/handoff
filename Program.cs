@@ -50,36 +50,19 @@ namespace Handoff
                 {
                     case "download":
                         Console.WriteLine("Finding download sources..");
-                        Downloader.Download(args[0].Split('/'), Wc_finished);
+                        Downloader.Download(args[0].Split('/'));
                         break;
                     default:
                         Console.WriteLine("This doesn't exist.. sorry!");
                         break;
                 }
             }
+        }
+
+        static void End()
+        {
             Console.WriteLine("Press any key to close Handoff");
             Console.ReadLine();
-        }
-
-        static string Get(string uri)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-            using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
-        }
-
-        private static void Wc_finished(object sender, AsyncCompletedEventArgs e)
-        {
-            string token = HandoffToken.GetToken();
-            string url = "http://localhost:5754/handoff/" + token + "/reload-plugins";
-            Get(url);
-            Console.WriteLine("Asked server to reload plugins!");
         }
         
         private static void Elevate()
