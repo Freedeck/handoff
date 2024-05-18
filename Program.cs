@@ -1,24 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
-using System.Dynamic;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using Microsoft.Win32;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Handoff
 {
     internal class Program
     {
+        [DllImport("kernel32.dll")]
+        static extern IntPtr GetConsoleWindow();
+
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        const int SW_HIDE = 0;
         static void Main(string[] args)
         {
+            var handle = GetConsoleWindow();
+
+            // Hide
+            ShowWindow(handle, SW_HIDE);
             if (args.Length != 0 && args[0].Contains("--setup"))
             {
                 if(args[0] != "--setup-admin") Elevate();
@@ -49,7 +51,6 @@ namespace Handoff
                 switch (action)
                 {
                     case "download":
-                        Console.WriteLine("Finding download sources..");
                         Downloader.Download(args[0].Split('/'));
                         break;
                     default:
@@ -57,12 +58,6 @@ namespace Handoff
                         break;
                 }
             }
-        }
-
-        static void End()
-        {
-            Console.WriteLine("Press any key to close Handoff");
-            Console.ReadLine();
         }
         
         private static void Elevate()
