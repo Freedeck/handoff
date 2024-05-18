@@ -33,7 +33,7 @@ namespace Handoff
                 wc.DownloadFile(url, to);
                 string token = HandoffToken.GetToken();
                 string urlRl = "http://localhost:5754/handoff/" + token + "/reload-plugins";
-                string urlNo = "http://localhost:5754/handoff/" + token + "/notify/Downloaded " + arggies[3];
+                string urlNo = "http://localhost:5754/handoff/" + token + "/notify/Downloaded " + arggies[3] +"!";
                 Get(urlRl);
                 Get(urlNo);
                 MessageBox.Show("Successfully downloaded plugin " + arggies[3] + "!", "Freedeck");
