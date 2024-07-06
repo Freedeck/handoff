@@ -27,7 +27,7 @@ namespace Handoff
                 string DocuPath = HandoffToken.GetOrDefault();
                 string FdPath = DocuPath + "\\InstallationPath.handoff";
                 StreamWriter a = File.CreateText(FdPath);
-                a.Write(DocuPath+"\\Freedeck");
+                a.Write(DocuPath);
                 a.Close();
                 using (RegistryKey key = Registry.ClassesRoot.CreateSubKey("freedeck")) 
                 {
